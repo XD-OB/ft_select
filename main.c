@@ -168,24 +168,23 @@ void		write_args(t_select *select)
 	t_dlist	*curr;
 	int		n;
 
-	if (select->args)
+	n = 0;
+	curr = select->args;
+	write_arg(select, curr, n++);
+	curr = curr->next;
+	while (curr != select->args)
 	{
-		n = 0;
-		curr = select->args;
-		write_arg(select, curr, n++);
+		write_arg(select, curr, n);
 		curr = curr->next;
-		while (curr != select->args)
-		{
-			write_arg(select, curr, n);
-			curr = curr->next;
-			n++;
-		}
+		n++;
 	}
 }
 
 void	draw_state(t_select *select)
 {
 	clear_terminal();
+	if (!select->args)
+		return ;
 	fill_lenscols(select);
 	if (!check_winsize(*select))
 		return ;
@@ -212,6 +211,8 @@ static void		move_arrow(t_select *select, int type)
 	int			n;
 	int			i;
 
+	if (!select->args)
+		return ;
 	if (type == KEY_DOWN)
 		select->current = select->current->next;
 	else if (type == KEY_UP)
@@ -239,6 +240,8 @@ void		select_elem(t_select *select)
 {
 	t_arg	*arg;
 
+	if (!select->args)
+		return ;
 	arg = (t_arg*)select->current->content;
 	arg->select = (!arg->select) ? 1 : 0;
 	select->current = select->current->next;
@@ -252,22 +255,40 @@ void		print_selected(t_select *select)
 	size_t		flag;
 	size_t		i;
 
+	i = 0;
 	flag = 0;
 	curr = select->args;
-	i = 0;
 	while (i++ < select->nbr_args)
 	{
 		arg = (t_arg*)curr->content;
-		if (flag)
-			ft_putstr_fd(" ", 2);
-		else
-			flag = 1;
 		if (arg->select)
+		{
+			if (flag)
+				ft_putstr_fd(" ", 2);
+			else
+				flag = 1;
 			ft_putstr_fd(arg->str, 2);
+		}
 		curr = curr->next;
 	}
 	free_select(select);
 	exit(EXIT_SUCCESS);
+}
+
+void	delete_elem(t_select *select)
+{
+	t_dlist		*tmp;
+
+	if (!select->args)
+	{
+		free_select(select);
+		exit(EXIT_SUCCESS);
+	}
+	tmp = select->current;
+	select->current = select->current->next;
+	select->nbr_args--;
+	dct_lstremove(&(select->args), tmp, delete_arg);
+	draw_state(select);
 }
 
 void	launch_select(t_select *select)
@@ -290,8 +311,8 @@ void	launch_select(t_select *select)
 			move_arrow(select, KEY_UP);
 		else if (buff == KEY_SPACE)
 			select_elem(select);
-		//else if (buff == KEY_DEL || buff == KEY_BSPACE)
-		//	delete_elem(select);
+		else if (buff == KEY_DEL || buff == KEY_BSPACE)
+			delete_elem(select);
 		else if (buff == KEY_ENTER)
 			print_selected(select);
 		buff = 0;

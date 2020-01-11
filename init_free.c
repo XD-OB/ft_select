@@ -45,7 +45,7 @@ void			init_select(t_select *select, int ac, char **av)
 	save_old_termios(select);
 }
 
-static void		delete_arg(void *content, size_t size)
+void		delete_arg(void *content, size_t size)
 {
 	t_arg		*arg;
 
@@ -58,7 +58,8 @@ void			free_select(t_select *select)
 {
 	if (select->lens_cols)
 		free(select->lens_cols);
-	dct_lstdel(&(select->args), delete_arg);
+	if (select->args)
+		dct_lstdel(&(select->args), delete_arg);
 	tcsetattr(STDIN_FILENO, TCSADRAIN, &(select->old_termios));
 	clear_terminal();
 }

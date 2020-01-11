@@ -1,7 +1,7 @@
 #ifndef	FT_SELECT_H
 # define FT_SELECT_H
 
-# include "../libft/includes/libft.h"
+# include "libft/includes/libft.h"
 # include <termcap.h>
 # include <termios.h>
 
@@ -40,6 +40,7 @@ void				free_select(t_select *select);
 void				init_term(void);
 t_arg				*create_arg(char *str);
 void				clear_terminal(void);
+void				delete_arg(void *content, size_t size);
 
 void				print_select(t_select select);       ///////////
 
