@@ -30,6 +30,7 @@ void			init_select(t_select *select, int ac, char **av)
 
 	select->args = NULL;
 	select->lens_cols = NULL;
+	select->sight = 0;
 	select->nbr_cols = 0;
 	select->nbr_args = ac - 1;
 	select->winsize.ws_row = tgetnum("li");
