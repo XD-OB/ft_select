@@ -49,6 +49,7 @@ void		delete_arg(void *content, size_t size)
 {
 	t_arg		*arg;
 
+	(void)size;
 	arg = (t_arg*)content;
 	free(arg->str);
 	free(arg);

@@ -100,8 +100,6 @@ void			write_empty(t_select *select)
 
 void			draw_state(t_select *select)
 {
-	char		*cm_cap;
-
 	if (select->lens_cols)
 		write_empty(select);
 	if (select->args)

@@ -17,8 +17,8 @@ static int		rank_inlst(t_dlist *lst, t_dlist *wanted)
 
 void			move_arrow(t_select *select, int type)
 {
+	size_t		i;
 	int			n;
-	int			i;
 
 	i = 0;
 	if (!select->args)
@@ -37,7 +37,7 @@ void			move_arrow(t_select *select, int type)
 	else if (type == KEY_LEFT)
 	{
 		n = rank_inlst(select->args, select->current);
-		if (n - select->rows >= 0)
+		if ((int)(n - select->rows) >= 0)
 			while (i++ < select->rows)
 				select->current = select->current->prev;
 	}

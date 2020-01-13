@@ -1,12 +1,12 @@
 #ifndef	FT_SELECT_H
 # define FT_SELECT_H
 
+# include <sys/ioctl.h>
 # include <termcap.h>
 # include <termios.h>
 # include <signal.h>
-# include <sys/ioctl.h>
-# include "libft/includes/libft.h"
 # include "consts.h"
+# include "libft.h"
 
 typedef struct		s_arg
 {
@@ -19,11 +19,12 @@ typedef	struct		s_select
 	t_dlist			*args;
 	t_dlist			*current;
 	struct termios	old_termios;
+	//struct winsize	winsize;
 	size_t			nbr_args;
 	size_t			nbr_cols;
+	size_t			rows;
+	size_t			cols;
 	int				*lens_cols;
-	int				rows;
-	int				cols;
 }					t_select;
 
 t_select			**get_aselect(void);

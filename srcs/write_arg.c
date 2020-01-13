@@ -35,12 +35,12 @@ static void		position_cap(t_select *select)
 
 static void		select_cap(t_select *select)
 {
+	(void)select;
 	tputs("\e[7m", 1, ft_putint);
 }
 
 void			write_arg(t_select *select, t_dlist *node, int n)
 {
-	char		*cm_cap;
 	t_arg		*arg;
 	t_point		pos;
 	int			width;
@@ -53,6 +53,6 @@ void			write_arg(t_select *select, t_dlist *node, int n)
 	if (arg->select)
 		select_cap(select);
 	width = select->lens_cols[n / select->rows];
-	ft_putstr_fd(arg->str, 2);
+	ft_dprintf(2, "%-*s", width, arg->str, 2);
 	reset_cap(select);
 }
