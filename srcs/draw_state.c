@@ -22,7 +22,8 @@ static void		fill_lenscols(t_select *select)
 	curr = select->args;
 	if (select->lens_cols)
 		free(select->lens_cols);
-	select->nbr_cols = calcul_nbrcols(select->nbr_args, select->rows);
+	select->nbr_cols = calcul_nbrcols(select->nbr_args,
+									select->winsize.ws_row);
 	if (!(select->lens_cols =
 				(int*)malloc(sizeof(int) * select->nbr_cols)))
 		exit_error_fs(select, ERROR_ALLOC);
@@ -34,7 +35,7 @@ static void		fill_lenscols(t_select *select)
 			ft_max(select->lens_cols[j], ft_strlen(arg->str));
 		curr = curr->next;
 		i++;
-		if (i % select->rows == 0)
+		if (i % select->winsize.ws_row == 0)
 			j++;
 	}
 }
@@ -49,7 +50,7 @@ static int		check_winsize(t_select select)
 	while (i < select.nbr_cols)
 		line_len += select.lens_cols[i++];
 	line_len += (select.nbr_cols - 1) * 2;
-	if (line_len > select.cols)
+	if (line_len > select.winsize.ws_col)
 	{
 		ft_putstr_fd("Small Terminal Dimension!", 2);
 		return (0);
@@ -86,9 +87,9 @@ void			write_empty(t_select *select)
 	while (i < select->nbr_cols)
 	{
 		j = 0;
-		while (j < select->rows)
+		while (j < select->winsize.ws_row)
 		{
-			n = (i * select->rows) + j;
+			n = (i * select->winsize.ws_row) + j;
 			pos = cursor_pos(*select, n);
 			move_cursor(select, pos);
 			ft_dprintf(2, "%*s", select->lens_cols[i], " ");

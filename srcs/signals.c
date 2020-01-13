@@ -26,6 +26,17 @@ static void		sig_handler(int sig)
 	}
 }
 
+static void		win_handler(int sig)
+{
+	t_select	**aselect;
+
+	(void)sig;
+	aselect = get_aselect();
+	ioctl(STDIN_FILENO, TIOCGWINSZ,
+			&((*aselect)->winsize));
+	draw_state(*aselect);
+}
+
 void			signal_handlers(void)
 {
 	signal(SIGVTALRM, &sig_handler);
@@ -52,5 +63,5 @@ void			signal_handlers(void)
 	signal(SIGURG, &sig_handler);
 	signal(SIGFPE, &sig_handler);
 	signal(SIGBUS, &sig_handler);
-	//signal(SIGWINCH,  );
+	signal(SIGWINCH, &win_handler);
 }

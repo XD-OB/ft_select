@@ -2,6 +2,7 @@
 # define FT_SELECT_H
 
 # include <sys/ioctl.h>
+# include <sys/stat.h>
 # include <termcap.h>
 # include <termios.h>
 # include <signal.h>
@@ -19,11 +20,9 @@ typedef	struct		s_select
 	t_dlist			*args;
 	t_dlist			*current;
 	struct termios	old_termios;
-	//struct winsize	winsize;
+	struct winsize	winsize;
 	size_t			nbr_args;
 	size_t			nbr_cols;
-	size_t			rows;
-	size_t			cols;
 	int				*lens_cols;
 }					t_select;
 

@@ -7,8 +7,8 @@ t_point			cursor_pos(t_select select, int n)
 	int			i;
 
 	pos.x = 0;
-	pos.y = n % select.rows;
-	tmp = n / select.rows;
+	pos.y = n % select.winsize.ws_row;
+	tmp = n / select.winsize.ws_row;
 	i = -1;
 	while (++i < tmp)
 		pos.x += select.lens_cols[i] + 2;
@@ -39,6 +39,31 @@ static void		select_cap(t_select *select)
 	tputs("\e[7m", 1, ft_putint);
 }
 
+void			print_arg(char *str, int width)
+{
+	struct stat		stat;
+
+	if (lstat(str, &stat) != -1)
+	{
+		if (S_ISDIR(stat.st_mode))
+			ft_dprintf(2, "%{CYAN}%-*s", width, str);
+		else if (S_ISLNK(stat.st_mode))
+			ft_dprintf(2, "%{RED}%-*s", width, str);
+		else if (S_ISSOCK(stat.st_mode))
+			ft_dprintf(2, "%{YELLOW}%-*s", width, str);
+		else if (S_ISBLK(stat.st_mode))
+			ft_dprintf(2, "%{GREEN}%-*s", width, str);
+		else if (S_ISCHR(stat.st_mode))
+			ft_dprintf(2, "%{BLUE}%-*s", width, str);
+		else if (S_ISFIFO(stat.st_mode))
+			ft_dprintf(2, "%{PURPLE}%-*s", width, str);
+		else
+			ft_dprintf(2, "%-*s", width, str);
+	}
+	else
+		ft_dprintf(2, "%-*s", width, str);
+}
+
 void			write_arg(t_select *select, t_dlist *node, int n)
 {
 	t_arg		*arg;
@@ -52,7 +77,7 @@ void			write_arg(t_select *select, t_dlist *node, int n)
 		position_cap(select);
 	if (arg->select)
 		select_cap(select);
-	width = select->lens_cols[n / select->rows];
-	ft_dprintf(2, "%-*s", width, arg->str, 2);
+	width = select->lens_cols[n / select->winsize.ws_row];
+	print_arg(arg->str, width);
 	reset_cap(select);
 }
