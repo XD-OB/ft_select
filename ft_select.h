@@ -4,6 +4,7 @@
 # include <termcap.h>
 # include <termios.h>
 # include <signal.h>
+# include <sys/ioctl.h>
 # include "libft/includes/libft.h"
 # include "consts.h"
 
@@ -25,6 +26,7 @@ typedef	struct		s_select
 	int				cols;
 }					t_select;
 
+t_select			**get_aselect(void);
 void				exit_error(int type);
 void				exit_error_fs(t_select *select, int type);
 void				init_select(t_select *select, int ac, char **av);
@@ -45,6 +47,8 @@ void				unset_ncanonic(t_select *select);
 void				set_ncanonic(t_select *select);
 void				print_selected(t_select *select);
 t_point				cursor_pos(t_select select, int n);
+void				signal_handlers(void);
+
 
 void				print_select(t_select select);       ///////////
 

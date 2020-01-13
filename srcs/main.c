@@ -35,59 +35,14 @@ void				launch_select(t_select *select)
 		buff = 0;
 	}
 }
-/*
-t_select		*get_select(void)
-{
-	static t_select		select;
 
-	return (&select);
-}
-
-void			kill_handler(int sig)
-{
-	t_select	*select;
-
-	select = get_select();
-	if (sig == SIGINT)
-	{
-		exit_error_fs(select, ERROR_ALLOC);
-	}
-}
-
-void			signal_handlers()
-{
-	signal(SIGINT, &kill_handler);
-	
-	signal(SIGHUP, &exit_handler);
-	signal(SIGKILL, &exit_handler);
-	signal(SIGTERM, &exit_handler);
-	signal(SIGSTOP, &exit_handler);
-	signal(SIGTSTP, &exit_handler);
-	signal(SIGQUIT, &exit_handler);
-	signal(SIGILL, &exit_handler);
-	signal(SIGABRT, &exit_handler);
-	signal(SIGTRAP, &exit_handler);
-	signal(SIGEMT, &exit_handler);
-	signal(SIGFPE, &exit_handler);
-	signal(SIGBUS, &exit_handler);
-	signal(SIGSEGV, &exit_handler);
-	signal(SIGSYS, &exit_handler);
-	signal(SIGTTIN, &exit_handler);
-	signal(SIGTTOU, &exit_handler);
-	signal(SIGXCPU, &exit_handler);
-	signal(SIGXFSZ, &exit_handler);
-	signal(SIGVTALRM, &exit_handler);
-	signal(SIGALRM, &exit_handler);
-	signal(SIGPROF, &exit_handler);
-	signal(SIGTSTP, &exit_handler);
-	signal(SIGCONT, &exit_handler);
-	signal(SIGWINCH, &draw_args);
-}
-*/
 int		main(int ac, char **av)
 {
+	t_select	**aselect;
 	t_select	select;
 
+	aselect = get_aselect();
+	*aselect = &select;
 	init_term();
 	signal_handlers();
 	init_select(&select, ac, av);
