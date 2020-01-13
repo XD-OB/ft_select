@@ -5,29 +5,35 @@ static void		dt_print_inc(t_dlist *alst)
 	t_arg		*arg;
 	int			i = 0;
 
-	while (++i < 8)
+	if (alst)
 	{
-		arg = (t_arg*)alst->content;
-		ft_printf("|%s|[s%u] -> ", arg->str, arg->select);
-		alst = alst->next;
+		while (++i < 8)
+		{
+			arg = (t_arg*)alst->content;
+			ft_printf("|%s|[s%u] -> ", arg->str, arg->select);
+			alst = alst->next;
+		}
+		ft_printf("\n");
 	}
-	ft_printf("\n");
 }
 static void		dt_print_dec(t_dlist *alst)
 {
 	t_arg		*arg;
 	int			i = 0;
 
-	while (++i < 8)
-		alst = alst->next;
-	i = 0;
-	while (++i < 8)
+	if (alst)
 	{
-		arg = (t_arg*)alst->content;
-		ft_printf("|%s|[s%u] -> ", arg->str, arg->select);
-		alst = alst->prev;
+		while (++i < 8)
+			alst = alst->next;
+		i = 0;
+		while (++i < 8)
+		{
+			arg = (t_arg*)alst->content;
+			ft_printf("|%s|[s%u] -> ", arg->str, arg->select);
+			alst = alst->prev;
+		}
+		ft_printf("\n");
 	}
-	ft_printf("\n");
 }
 void			print_select(t_select select)
 {

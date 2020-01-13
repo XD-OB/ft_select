@@ -2,35 +2,29 @@
 
 void	dct_lstremove(t_dlist **alst, t_dlist *place, void (*del)(void*, size_t))
 {
-	t_dlist		*curr;
+	t_dlist		*tmp;
 
-	if (!alst || !*alst || !del)
+	if (!alst || !*alst || !del || !place)
 		return ;
-	curr = *alst;
-	while (curr != place)
-		curr = curr->next;
-	del(curr->content, curr->content_size);
-	if (curr->prev == curr->next)
+	if (place == *alst && place == place->next)
 	{
+		del((*alst)->content, (*alst)->content_size);
 		free(*alst);
-		*alst->prev = NULL;
-		*alst->next = NULL;
 		*alst = NULL;
-	}
-	else if (curr == *alst)
-	{
-		curr->prev->next = curr->next;
-		curr->next->prev = curr->prev;
-		*alst = (*alst)->next;
-		free(curr);
-		curr = NULL;
 	}
 	else
 	{
-		curr->prev->next = curr->next;
-		curr->next->prev = curr->prev;
-		free(curr);
-		curr = NULL;
-		
-	}
+		tmp = *alst;
+		while (*alst != place)
+			*alst = (*alst)->next;
+		(*alst)->prev->next = (*alst)->next;
+		(*alst)->next->prev = (*alst)->prev;
+		del((*alst)->content, (*alst)->content_size);
+		if (*alst == tmp)
+			
+			tmp = tmp->next;
+		free(*alst);
+		*alst = NULL;
+		*alst = tmp;
+	}	
 }

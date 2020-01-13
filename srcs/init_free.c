@@ -7,18 +7,18 @@ void			init_term(void)
 
 	term_type = getenv("TERM");
 	if (!term_type)
-		exit_error("TERM is none set!");
+		exit_error(ERROR_SETTERM);
 	ret = tgetent(NULL, term_type);
 	if (ret < 0)
-		exit_error("Fail to Access to the Termcap Database!");
+		exit_error(ERROR_ATCAPDB);
 	if (ret == 0)
-		exit_error("Terminal type not found in the Database!");
+		exit_error(ERROR_TTNFDB);
 }
 
 static void		save_old_termios(t_select *select)
 {
 	if (isatty(STDIN_FILENO) != 1)
-		exit_error_fs(select, "STDIN_FILENO refers to file other than terminal!");
+		exit_error_fs(select, ERROR_STDINNTERM);
 	tcgetattr(STDIN_FILENO, &(select->old_termios));
 }
 
@@ -60,6 +60,5 @@ void			free_select(t_select *select)
 		free(select->lens_cols);
 	if (select->args)
 		dct_lstdel(&(select->args), delete_arg);
-	tcsetattr(STDIN_FILENO, TCSADRAIN, &(select->old_termios));
-	clear_terminal();
+	unset_ncanonic(select);
 }

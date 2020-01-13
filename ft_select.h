@@ -1,19 +1,11 @@
 #ifndef	FT_SELECT_H
 # define FT_SELECT_H
 
-# include "libft/includes/libft.h"
 # include <termcap.h>
 # include <termios.h>
-
-# define KEY_RIGHT 4414235
-# define KEY_LEFT 4479771
-# define KEY_DOWN 4348699
-# define KEY_UP 4283163
-# define KEY_BSPACE 8
-# define KEY_SPACE 32
-# define KEY_ENTER 10
-# define KEY_DEL 127
-# define KEY_ESC 27
+# include <signal.h>
+# include "libft/includes/libft.h"
+# include "consts.h"
 
 typedef struct		s_arg
 {
@@ -33,14 +25,26 @@ typedef	struct		s_select
 	int				cols;
 }					t_select;
 
-void				exit_error(char *msg);
-void				exit_error_fs(t_select* select, char *msg);
+void				exit_error(int type);
+void				exit_error_fs(t_select *select, int type);
 void				init_select(t_select *select, int ac, char **av);
 void				free_select(t_select *select);
 void				init_term(void);
 t_arg				*create_arg(char *str);
 void				clear_terminal(void);
 void				delete_arg(void *content, size_t size);
+void				write_arg(t_select *select, t_dlist *node, int n);
+int					ft_putint(int c);
+void				move_arrow(t_select *select, int type);
+void				print_selected(t_select *select);
+void				delete_elem(t_select *select);
+void				select_elem(t_select *select);
+void				draw_state(t_select *select);
+void				move_cursor(t_select *select, t_point p);
+void				unset_ncanonic(t_select *select);
+void				set_ncanonic(t_select *select);
+void				print_selected(t_select *select);
+t_point				cursor_pos(t_select select, int n);
 
 void				print_select(t_select select);       ///////////
 
