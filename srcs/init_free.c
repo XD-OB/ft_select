@@ -47,16 +47,6 @@ void			init_select(t_select *select, int ac, char **av)
 	save_old_termios(select);
 }
 
-void		delete_arg(void *content, size_t size)
-{
-	t_arg		*arg;
-
-	(void)size;
-	arg = (t_arg*)content;
-	free(arg->str);
-	free(arg);
-}
-
 void			free_select(t_select *select)
 {
 	if (select->lens_cols)

@@ -16,9 +16,6 @@ static void		sig_handler(int sig)
 		set_ncanonic(*aselect);
 		draw_state(*aselect);
 	}
-	//else if (sig == SIGWINCH)
-	//{
-	//}
 	else
 	{
 		free_select(*aselect);

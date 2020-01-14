@@ -13,21 +13,14 @@ t_arg				*create_arg(char *str)
 	return (arg);
 }
 
-void				move_cursor(t_select *select, t_point p)
+void				delete_arg(void *content, size_t size)
 {
-	char			*cm_cap;
+	t_arg			*arg;
 
-	if (!(cm_cap = tgetstr("cm", NULL)))
-		exit_error_fs(select, ERROR_TCAPNF);
-	tputs(tgoto(cm_cap, p.x, p.y), 1, ft_putint);
-}
-
-void				clear_terminal(void)
-{
-	char			*clear_cap;
-
-	clear_cap = tgetstr("cl", NULL);
-	tputs(clear_cap, 1, ft_putint);
+	(void)size;
+	arg = (t_arg*)content;
+	free(arg->str);
+	free(arg);
 }
 
 t_select			**get_aselect(void)
@@ -40,5 +33,5 @@ t_select			**get_aselect(void)
 int					ft_putint(int c)
 {
 	write(2, &c, 1);
-	return (0);
+	return (1);
 }

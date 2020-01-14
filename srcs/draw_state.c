@@ -22,8 +22,8 @@ static void		fill_lenscols(t_select *select)
 	curr = select->args;
 	if (select->lens_cols)
 		free(select->lens_cols);
-	select->nbr_cols = calcul_nbrcols(select->nbr_args,
-									select->winsize.ws_row);
+	select->nbr_cols =
+		calcul_nbrcols(select->nbr_args, select->winsize.ws_row);
 	if (!(select->lens_cols =
 				(int*)malloc(sizeof(int) * select->nbr_cols)))
 		exit_error_fs(select, ERROR_ALLOC);
@@ -34,79 +34,45 @@ static void		fill_lenscols(t_select *select)
 		select->lens_cols[j] =
 			ft_max(select->lens_cols[j], ft_strlen(arg->str));
 		curr = curr->next;
-		i++;
-		if (i % select->winsize.ws_row == 0)
+		if (++i % select->winsize.ws_row == 0)
 			j++;
 	}
 }
 
-static int		check_winsize(t_select select)
+static int		check_winsize(t_select *select)
 {
 	size_t		line_len;
 	size_t		i;
 
 	i = 0;
 	line_len = 0;
-	while (i < select.nbr_cols)
-		line_len += select.lens_cols[i++];
-	line_len += (select.nbr_cols - 1) * 2;
-	if (line_len > select.winsize.ws_col)
-	{
-		ft_putstr_fd("Small Terminal Dimension!", 2);
+	while (i < select->nbr_cols)
+		line_len += select->lens_cols[i++];
+	line_len += (select->nbr_cols - 1) * 2;
+	if (line_len > select->winsize.ws_col)
 		return (0);
-	}
 	return (1);
 }
 
-static void		write_args(t_select *select)
+void			write_emptys(t_select *select)
 {
-	t_dlist		*curr;
-	int			n;
+	char			*str;
+	size_t			len;
 
-	n = 0;
-	curr = select->args;
-	write_arg(select, curr, n++);
-	curr = curr->next;
-	while (curr != select->args)
-	{
-		write_arg(select, curr, n);
-		curr = curr->next;
-		n++;
-	}
-}
-
-void			write_empty(t_select *select)
-{
-	t_point		pos;
-	size_t		i;
-	size_t		j;
-	int			n;
-
-	i = 0;
-
-	while (i < select->nbr_cols)
-	{
-		j = 0;
-		while (j < select->winsize.ws_row)
-		{
-			n = (i * select->winsize.ws_row) + j;
-			pos = cursor_pos(*select, n);
-			move_cursor(select, pos);
-			ft_dprintf(2, "%*s", select->lens_cols[i], " ");
-			j++;
-		}
-		i++;
-	}
+	move_cursor(select, pt_new(0, 0));
+	len = select->winsize.ws_row * select->winsize.ws_col;
+	str = ft_strcnew(len, ' ');
+	write(2, str, len);
+	free(str);
 }
 
 void			draw_state(t_select *select)
 {
-	if (select->lens_cols)
-		write_empty(select);
+	write_emptys(select);
 	if (select->args)
 	{
 		fill_lenscols(select);
-		if (!check_winsize(*select))
+		if (!check_winsize(select))
 			return ;
 		write_args(select);
 	}
