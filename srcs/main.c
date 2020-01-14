@@ -69,10 +69,7 @@ void				launch_select(t_select *select)
 		else if (buff == KEY_TAB)
 			press_tab(select);
 		else if (ft_isprint(buff))
-		{
-			if (select->take)
-				search_take(select, buff);
-		}
+			search_engine(select, buff);
 		buff = 0;
 	}
 }

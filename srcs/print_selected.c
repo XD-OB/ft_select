@@ -36,7 +36,7 @@ void			print_selected(t_select *select)
 	while (i++ < select->nbr_args)
 	{
 		arg = (t_arg*)curr->content;
-		if (arg->select)
+		if (arg->nat_select)
 			list_addnode(&list, arg->str, &flag);
 		curr = curr->next;
 	}

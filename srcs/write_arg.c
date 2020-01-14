@@ -39,7 +39,7 @@ static void		select_cap(t_select *select)
 	tputs("\e[7m", 1, ft_putint);
 }
 
-static void		bold_cap(t_select *select)
+void			bold_cap(t_select *select)
 {
 	char		*bold_cap;
 
@@ -48,47 +48,77 @@ static void		bold_cap(t_select *select)
 	tputs(bold_cap, 1, ft_putint);
 }
 
-void			print_arg(char *str, int width)
+void			set_color(char *str)
 {
 	struct stat		stat;
 
 	if (lstat(str, &stat) != -1)
 	{
 		if (S_ISDIR(stat.st_mode))
-			ft_dprintf(2, "%{CYAN}%-*s", width, str);
+			ft_dprintf(2, "%{cyan}");
 		else if (S_ISLNK(stat.st_mode))
-			ft_dprintf(2, "%{RED}%-*s", width, str);
-		else if (S_ISSOCK(stat.st_mode))
-			ft_dprintf(2, "%{YELLOW}%-*s", width, str);
+			ft_dprintf(2, "%{red}");
 		else if (S_ISBLK(stat.st_mode))
-			ft_dprintf(2, "%{GREEN}%-*s", width, str);
+			ft_dprintf(2, "%{green}");
 		else if (S_ISCHR(stat.st_mode))
-			ft_dprintf(2, "%{BLUE}%-*s", width, str);
-		else if (S_ISFIFO(stat.st_mode))
-			ft_dprintf(2, "%{PURPLE}%-*s", width, str);
-		else
-			ft_dprintf(2, "%-*s", width, str);
+			ft_dprintf(2, "%{blue}");
+		else if (S_ISFIFO(stat.st_mode) ||
+				S_ISSOCK(stat.st_mode))
+			ft_dprintf(2, "%{purple}");
 	}
-	else
-		ft_dprintf(2, "%-*s", width, str);
+}
+
+void			temp_select_cap(t_select *select)
+{
+	(void)select;
+	ft_dprintf(2, "%{yellow}");
+	select_cap(select);
+}
+
+/*static */void		print_search_part(t_select *select, t_dlist *node)
+{
+	t_arg		*arg;
+
+	arg = (t_arg*)node->content;
+	set_color(arg->str);
+	if (node == select->current)
+		position_cap(select);
+	if (arg->dyn_select)
+		temp_select_cap(select);
+	if (arg->nat_select)
+		select_cap(select);
+	if (arg->search)
+		bold_cap(select);
+	write(2, arg->str, select->len_search);
+	reset_cap(select);
+}
+
+void		print_rest(t_select *select, t_dlist *node, int width)
+{
+	t_arg		*arg;
+
+	arg = (t_arg*)node->content;
+	set_color(arg->str);
+	if (node == select->current)
+		position_cap(select);
+	if (arg->dyn_select)
+		temp_select_cap(select);
+	if (arg->nat_select)
+		select_cap(select);
+	width -= select->len_search;
+	ft_dprintf(2, "%-*s", width, &arg->str[select->len_search]);
+	reset_cap(select);
 }
 
 void			write_arg(t_select *select, t_dlist *node, int n)
 {
-	t_arg		*arg;
 	t_point		pos;
 	int			width;
 
-	arg = (t_arg*)node->content;
 	pos = cursor_pos(*select, n);
 	move_cursor(select, pos);
-	if (node == select->current)
-		position_cap(select);
-	if (arg->dyn_select || arg->nat_select)
-		select_cap(select);
-	if (arg->search)
-		bold_cap(select);
 	width = select->lens_cols[n / select->winsize.ws_row];
-	print_arg(arg->str, width);
-	reset_cap(select);
+	if (select->len_search > 0)
+		print_search_part(select, node);
+	print_rest(select, node, width);
 }

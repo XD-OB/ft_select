@@ -57,9 +57,7 @@ void				set_ncanonic(t_select *select);
 void				print_selected(t_select *select);
 t_point				cursor_pos(t_select select, int n);
 void				signal_handlers(void);
-void				search_position(t_select *select, char c);
-void				search_take(t_select *select, char c);
-
+void				search_engine(t_select *select, char c);
 
 void				print_select(t_select select);       ///////////
 

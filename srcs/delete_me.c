@@ -10,7 +10,7 @@ static void		dt_print_inc(t_dlist *alst)
 		while (++i < 8)
 		{
 			arg = (t_arg*)alst->content;
-			ft_printf("|%s|[s%u] -> ", arg->str, arg->select);
+			ft_printf("|%s|[s%u][s%u] -> ", arg->str, arg->nat_select, arg->dyn_select);
 			alst = alst->next;
 		}
 		ft_printf("\n");
@@ -29,7 +29,7 @@ static void		dt_print_dec(t_dlist *alst)
 		while (++i < 8)
 		{
 			arg = (t_arg*)alst->content;
-			ft_printf("|%s|[s%u] -> ", arg->str, arg->select);
+			ft_printf("|%s|[s%u][s%u] -> ", arg->str, arg->nat_select, arg->dyn_select);
 			alst = alst->prev;
 		}
 		ft_printf("\n");
