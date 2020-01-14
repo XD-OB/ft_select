@@ -7,8 +7,9 @@ t_arg				*create_arg(char *str)
 	if (!(arg = (t_arg*)malloc(sizeof(t_arg))))
 		exit_error(ERROR_ALLOC);
 	arg->str = ft_strdup(str);
-	arg->select = 0;
-	arg->blink = 0;
+	arg->dyn_select = 0;
+	arg->nat_select = 0;
+	arg->search = 0;
 	return (arg);
 }
 

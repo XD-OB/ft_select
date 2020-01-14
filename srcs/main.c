@@ -13,6 +13,40 @@ static int			is_arrow(int key)
 	return (0);
 }
 
+static void			to_natural(t_select *select)
+{
+	t_dlist			*curr;
+	t_arg			*arg;
+	size_t			i;
+
+	i = 0;
+	curr = select-> args;
+	while (i++ < select->nbr_args)
+	{
+		arg = (t_arg*)curr->content;
+		if (arg->dyn_select)
+		{
+			arg->nat_select = 1;
+			arg->dyn_select = 0;
+			arg->search = 0;
+		}
+		curr = curr->next;
+	}
+}
+
+static void			press_tab(t_select *select)
+{
+	if (select->take)
+	{
+		select->take =  0;
+		to_natural(select);
+	}
+	else
+		select->take = 1;
+	select->len_search = 0;
+	draw_state(select);
+}
+
 void				launch_select(t_select *select)
 {
 	int				buff;
@@ -33,18 +67,11 @@ void				launch_select(t_select *select)
 		else if (buff == KEY_ENTER)
 			print_selected(select);
 		else if (buff == KEY_TAB)
-		{
-			select->sight = (!select->sight) ? 1 : 0;
-			if (select->len_word)
-				select->len_word = 0;
-		}
+			press_tab(select);
 		else if (ft_isprint(buff))
 		{
-			if (select->sight)
-				search_sight(select, buff);
-			//else if (select->take)
-			else
-				search_position(select, buff);
+			if (select->take)
+				search_take(select, buff);
 		}
 		buff = 0;
 	}

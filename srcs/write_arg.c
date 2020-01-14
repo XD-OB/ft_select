@@ -39,13 +39,13 @@ static void		select_cap(t_select *select)
 	tputs("\e[7m", 1, ft_putint);
 }
 
-static void		blink_cap(t_select *select)
+static void		bold_cap(t_select *select)
 {
-	char		*blink_cap;
+	char		*bold_cap;
 
-	if (!(blink_cap = tgetstr("md", NULL)))
+	if (!(bold_cap = tgetstr("md", NULL)))
 		exit_error_fs(select, ERROR_TCAPNF);
-	tputs(blink_cap, 1, ft_putint);
+	tputs(bold_cap, 1, ft_putint);
 }
 
 void			print_arg(char *str, int width)
@@ -84,10 +84,10 @@ void			write_arg(t_select *select, t_dlist *node, int n)
 	move_cursor(select, pos);
 	if (node == select->current)
 		position_cap(select);
-	if (arg->select)
+	if (arg->dyn_select || arg->nat_select)
 		select_cap(select);
-	if (select->sight && arg->blink)
-		blink_cap(select);
+	if (arg->search)
+		bold_cap(select);
 	width = select->lens_cols[n / select->winsize.ws_row];
 	print_arg(arg->str, width);
 	reset_cap(select);

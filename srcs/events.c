@@ -51,7 +51,7 @@ void			select_elem(t_select *select)
 	if (!select->args)
 		return ;
 	arg = (t_arg*)select->current->content;
-	arg->select = (!arg->select) ? 1 : 0;
+	arg->nat_select = (!arg->nat_select) ? 1 : 0;
 	select->current = select->current->next;
 	draw_state(select);
 }

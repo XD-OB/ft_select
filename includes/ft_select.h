@@ -9,11 +9,17 @@
 # include "consts.h"
 # include "libft.h"
 
+/*
+**	nat: natural
+**	dyn: dynamic
+*/
+
 typedef struct		s_arg
 {
 	char			*str;
-	int				select:1;
-	int				blink:1;
+	int				dyn_select:1;
+	int				nat_select:1;
+	int				search:1;
 }					t_arg;
 
 typedef	struct		s_select
@@ -24,10 +30,9 @@ typedef	struct		s_select
 	struct winsize	winsize;
 	size_t			nbr_args;
 	size_t			nbr_cols;
-	size_t			len_word;
-	size_t			sight;
-	size_t			take;
+	size_t			len_search;
 	int				*lens_cols;
+	int				take:1;
 }					t_select;
 
 t_select			**get_aselect(void);
@@ -53,7 +58,7 @@ void				print_selected(t_select *select);
 t_point				cursor_pos(t_select select, int n);
 void				signal_handlers(void);
 void				search_position(t_select *select, char c);
-void				search_sight(t_select *select, char c);
+void				search_take(t_select *select, char c);
 
 
 void				print_select(t_select select);       ///////////

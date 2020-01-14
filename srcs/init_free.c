@@ -31,9 +31,8 @@ void			init_select(t_select *select, int ac, char **av)
 	select->args = NULL;
 	select->lens_cols = NULL;
 	select->take = 0;
-	select->sight = 0;
 	select->nbr_cols = 0;
-	select->len_word = 0;
+	select->len_search = 0;
 	select->nbr_args = ac - 1;
 	select->winsize.ws_row = tgetnum("li");
 	select->winsize.ws_col = tgetnum("co");

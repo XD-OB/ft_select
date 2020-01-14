@@ -26,10 +26,10 @@ static char		*find_ref_2(t_select *select)
 	char		*ref;
 
 	ref = NULL;
-	if (select->len_word)
+	if (select->len_search)
 	{
 		arg = (t_arg*)select->current->content;
-		ref = ft_strndup(arg->str, select->len_word);
+		ref = ft_strndup(arg->str, select->len_search);
 	}
 	return (ref);
 }
@@ -38,9 +38,7 @@ void			search_position(t_select *select, char c)
 {
 	t_dlist		*curr;
 	char		*ref;
-	int			found;
 
-	found = 0;
 	ref = NULL;
 	ref = find_ref_2(select);
 	ft_strccombin(&ref, c);
@@ -48,12 +46,12 @@ void			search_position(t_select *select, char c)
 	if (curr)
 	{
 		select->current = curr;
-		select->len_word++;
+		select->len_search++;
 	}
 	else
 	{
 		select->current = select->args;
-		select->len_word = 0;
+		select->len_search = 0;
 	}
 	free(ref);
 	draw_state(select);

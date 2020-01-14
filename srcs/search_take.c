@@ -13,9 +13,9 @@ static char		*find_ref(t_select *select)
 	while (i++ < select->nbr_args)
 	{
 		arg = (t_arg*)curr->content;
-		if (arg->blink)
+		if (arg->search)
 		{
-			ref = ft_strndup(arg->str, select->sight - 1);
+			ref = ft_strndup(arg->str, select->len_search);
 			break ;
 		}
 		curr = curr->next;
@@ -23,7 +23,7 @@ static char		*find_ref(t_select *select)
 	return (ref);
 }
 
-static int		update_blinks(t_select *select, char *ref)
+static int		update_searchs(t_select *select, char *ref)
 {
 	t_dlist		*curr;
 	t_arg		*arg;
@@ -40,30 +40,37 @@ static int		update_blinks(t_select *select, char *ref)
 		arg = (t_arg*)curr->content;
 		if (!ft_strncmp(arg->str, ref, len_ref))
 		{
-			arg->blink = 1;
+			arg->search = 1;
+			arg->dyn_select = 1;
 			found = 1;
 		}
 		else
-			arg->blink = 0;
+		{
+			arg->search = 0;
+			arg->dyn_select = 0;
+		}
 		curr = curr->next;
 	}
 	return (found);
 }
 
-void			search_sight(t_select *select, char c)
+void			search_take(t_select *select, char c)
 {
 	char		*ref;
 	int			found;
 
 	ref = NULL;
-	if (select->sight > 1)
+	if (select->len_search > 0)
 		ref = find_ref(select);
 	ft_strccombin(&ref, c);
-	found = update_blinks(select, ref);
+	found = update_searchs(select, ref);
 	if (found)
-		select->sight++;
+		select->len_search++;
 	else
-		select->sight = 0;
+	{
+		select->len_search = 0;
+		select->take = 0;
+	}
 	free(ref);
 	draw_state(select);
 }
