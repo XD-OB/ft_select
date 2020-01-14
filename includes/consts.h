@@ -1,6 +1,7 @@
 #ifndef CONSTS_H
 # define CONSTS_H
 
+# define KEY_FSPACE 2117294875
 # define KEY_RIGHT 4414235
 # define KEY_LEFT 4479771
 # define KEY_DOWN 4348699

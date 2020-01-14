@@ -2,10 +2,12 @@
 # define FT_SELECT_H
 
 # include <sys/ioctl.h>
+# include <sys/types.h>
 # include <sys/stat.h>
 # include <termcap.h>
 # include <termios.h>
 # include <signal.h>
+# include <dirent.h>
 # include "consts.h"
 # include "libft.h"
 

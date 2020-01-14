@@ -56,6 +56,47 @@ static void			press_tab(t_select *select)
 	draw_state(select);
 }
 
+char				*
+
+void				enter_rep(t_select *select)
+{
+	struct dirent	*dirent;
+	t_dlist			*node;
+	t_arg			*arg;
+	char			*path;
+	char			*parent;
+	DIR				*dir;
+
+	arg = (t_arg*)select->current->content;
+	dir = opendir(arg->str);
+	if (!dir)
+		return ;
+	parent = ft_strdup(arg->str);
+	if (select->lens_cols)
+		free(select->lens_cols);
+	if (select->args)
+		dct_lstdel(&(select->args), delete_arg);
+	select->args = NULL;
+	select->lens_cols = NULL;
+	select->nbr_cols = 0;
+	select->len_search = 0;
+	select->nbr_args = 0;
+	dirent = readdir(dir);
+	while (dirent)
+	{
+		path = full_path(parent, dirent->d_name)
+		arg = create_arg(path);
+		free(path);
+		node = dct_lstnew_sm(arg, sizeof(arg));
+		dct_lstadd_last(&(select->args), node);
+		select->nbr_args++;
+		dirent = readdir(dir);
+	}
+	free(parent);
+	select->current = select->args;
+	draw_state(select);
+}
+
 void				launch_select(t_select *select)
 {
 	int				buff;
@@ -76,9 +117,10 @@ void				launch_select(t_select *select)
 			print_selected(select);
 		else if (buff == KEY_TAB)
 			press_tab(select);
+		else if (buff == KEY_FSPACE)
+			enter_rep(select);
 		else if (ft_isprint(buff))
 			search_engine(select, buff);
-		//ft_dprintf(2, "================ %d", buff);
 		buff = 0;
 	}
 }
