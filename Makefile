@@ -11,7 +11,7 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 SELECT = main init_free write_arg draw_state ncanonic print_selected\
-		 signals tools events exit\
+		 signals tools events exit search_position search_sight\
 		 delete_me\
 
 SRC = $(addprefix srcs/, $(addsuffix .c, $(SELECT)))

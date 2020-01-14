@@ -8,7 +8,7 @@ t_arg				*create_arg(char *str)
 		exit_error(ERROR_ALLOC);
 	arg->str = ft_strdup(str);
 	arg->select = 0;
-	arg->blank = 0;
+	arg->blink = 0;
 	return (arg);
 }
 

@@ -8,9 +8,9 @@
 # define KEY_BSPACE 8
 # define KEY_SPACE 32
 # define KEY_ENTER 10
-# define KEY_CTRL 17
 # define KEY_DEL 127
 # define KEY_ESC 27
+# define KEY_TAB 9
 
 # define ERROR_SETTERM 0
 # define ERROR_ATCAPDB 1

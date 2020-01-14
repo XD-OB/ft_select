@@ -13,37 +13,6 @@ static int			is_arrow(int key)
 	return (0);
 }
 
-void				search_sight(t_select *select, char c)
-{
-	t_dlist			*curr;
-	t_arg			*arg;
-	char			*ref;
-
-	ref = NULL;
-	if (select->sight > 1)
-	{
-		curr = select->args;
-		while (curr->next != select->args)
-		{
-			arg = (t_arg*)curr->content;
-			if (arg->blank)
-			{
-				ref = ft_strndup(arg->str, select->sight - 1);
-				break ;
-			}
-			curr = curr->next;
-		}
-		if (!ref)
-		{
-			arg = (t_arg*)curr->content;
-			if (arg->blank)
-				ref = ft_strndup(arg->str, select->sight - 1);
-		}
-	}
-	//ft_strcombin(&ref, &c);
-	ft_dprintf(2, "========== %c\n", c);
-}
-
 void				launch_select(t_select *select)
 {
 	int				buff;
@@ -63,16 +32,20 @@ void				launch_select(t_select *select)
 			delete_elem(select);
 		else if (buff == KEY_ENTER)
 			print_selected(select);
-		else if (buff == 65)
+		else if (buff == KEY_TAB)
 		{
 			select->sight = (!select->sight) ? 1 : 0;
-			//ft_dprintf(2, "dsjkhdjshfjdsh");
+			if (select->len_word)
+				select->len_word = 0;
 		}
-		/*else if (buff > 31 && buff < 127)
+		else if (ft_isprint(buff))
 		{
 			if (select->sight)
 				search_sight(select, buff);
-		}*/
+			//else if (select->take)
+			else
+				search_position(select, buff);
+		}
 		buff = 0;
 	}
 }

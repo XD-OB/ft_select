@@ -13,7 +13,7 @@ typedef struct		s_arg
 {
 	char			*str;
 	int				select:1;
-	int				blank:1;
+	int				blink:1;
 }					t_arg;
 
 typedef	struct		s_select
@@ -24,7 +24,9 @@ typedef	struct		s_select
 	struct winsize	winsize;
 	size_t			nbr_args;
 	size_t			nbr_cols;
-	int			sight;
+	size_t			len_word;
+	size_t			sight;
+	size_t			take;
 	int				*lens_cols;
 }					t_select;
 
@@ -50,6 +52,8 @@ void				set_ncanonic(t_select *select);
 void				print_selected(t_select *select);
 t_point				cursor_pos(t_select select, int n);
 void				signal_handlers(void);
+void				search_position(t_select *select, char c);
+void				search_sight(t_select *select, char c);
 
 
 void				print_select(t_select select);       ///////////
