@@ -13,7 +13,7 @@ static void		to_natural(t_select *select)
 		arg = (t_arg*)curr->content;
 		if (arg->dyn_select)
 		{
-			arg->nat_select = 1;
+			arg->nat_select = (!arg->nat_select) ? 1 : 0;
 			arg->dyn_select = 0;
 			arg->search = 0;
 		}
@@ -25,7 +25,8 @@ static void		sound_terminal(void)
 {
 	char		*sound_cap;
 
-	if (sound_cap = tgetstr("bl", NULL))
+	sound_cap = tgetstr("bl", NULL);
+	if (sound_cap)
 		tputs(sound_cap, 1, ft_putint);
 }
 

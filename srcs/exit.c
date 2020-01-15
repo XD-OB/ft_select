@@ -1,6 +1,6 @@
 #include "ft_select.h"
 
-void	exit_error(int type)
+void		exit_error(int type)
 {
 	char	*msg;
 
@@ -8,7 +8,7 @@ void	exit_error(int type)
 	if (type == ERROR_ALLOC)
 		msg = "Can't Allocate Memory!";
 	else if (type == ERROR_SETTERM)
-		msg = "TERM is none set!";
+		msg = "TERM is not set!";
 	else if (type == ERROR_ATCAPDB)
 		msg = "Fail to Access to the Termcap Database!";
 	else if (type == ERROR_TTNFDB)
@@ -17,7 +17,7 @@ void	exit_error(int type)
 	exit(EXIT_FAILURE);
 }
 
-void	exit_error_fs(t_select *select, int type)
+void		exit_error_fs(t_select *select, int type)
 {
 	char	*msg;
 

@@ -37,7 +37,7 @@ void			move_arrow(t_select *select, int type)
 	else if (type == KEY_LEFT)
 	{
 		n = rank_inlst(select->args, select->current);
-		if ((int)(n - select->winsize.ws_row) >= 0)
+		if ((int)(n - select->winsize.ws_row) > 0)
 			while (i++ < select->winsize.ws_row)
 				select->current = select->current->prev;
 	}

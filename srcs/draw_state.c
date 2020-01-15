@@ -54,10 +54,10 @@ static int		check_winsize(t_select *select)
 	return (1);
 }
 
-void			write_emptys(t_select *select)
+static void		write_emptys(t_select *select)
 {
-	char			*str;
-	size_t			len;
+	char		*str;
+	size_t		len;
 
 	move_cursor(select, pt_new(0, 0));
 	len = select->winsize.ws_row * select->winsize.ws_col;

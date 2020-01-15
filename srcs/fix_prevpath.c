@@ -1,7 +1,7 @@
 #include "ft_select.h"
 
 static void		clean_path(char **path, char **sub_paths,
-							size_t len_subs, int p)
+							size_t len_subs, size_t p)
 {
 	char		**clean_subpaths;
 	size_t		i;
@@ -12,7 +12,7 @@ static void		clean_path(char **path, char **sub_paths,
 	clean_subpaths = tabstr_new(len_subs - 2);
 	while (i < len_subs)
 	{
-		if ((int)i == p - 1)
+		if (i == p - 1)
 			i += 2;
 		clean_subpaths[j++] = ft_strdup(sub_paths[i++]);
 	}
@@ -21,7 +21,7 @@ static void		clean_path(char **path, char **sub_paths,
 	tabstr_free(&clean_subpaths);
 }
 
-static int		there_isprev(char **sub_paths, size_t len_subs)
+static size_t	there_isprev(char **sub_paths, size_t len_subs)
 {
 	size_t		i;
 
@@ -32,14 +32,14 @@ static int		there_isprev(char **sub_paths, size_t len_subs)
 			return (i);
 		i++;
 	}
-	return (-1);
+	return (0);
 }
 
 void			fix_prevpath(char **path)
 {
-	size_t		len_subs;
 	char		**sub_paths;
-	int			found;
+	size_t		len_subs;
+	size_t		found;
 
 	sub_paths = ft_strsplit(*path, '/');
 	len_subs = tabstr_len(sub_paths);

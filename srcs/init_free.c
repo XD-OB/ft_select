@@ -19,7 +19,8 @@ static void		save_old_termios(t_select *select)
 {
 	if (isatty(STDIN_FILENO) != 1)
 		exit_error_fs(select, ERROR_STDINNTERM);
-	tcgetattr(STDIN_FILENO, &(select->old_termios));
+	if (tcgetattr(STDIN_FILENO, &(select->old_termios)) == -1)
+		exit_error_fs(select, ERROR_GETATTR);
 }
 
 void			init_select(t_select *select, int ac, char **av)

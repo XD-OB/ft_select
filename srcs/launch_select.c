@@ -1,6 +1,6 @@
 #include "ft_select.h"
 
-static int			is_arrow(int key)
+static int		is_arrow(int key)
 {
 	if (key == KEY_RIGHT)
 		return (1);
@@ -13,9 +13,9 @@ static int			is_arrow(int key)
 	return (0);
 }
 
-void				launch_select(t_select *select)
+void			launch_select(t_select *select)
 {
-	int				buff;
+	int			buff;
 
 	buff = 0;
 	draw_state(select);
@@ -34,7 +34,7 @@ void				launch_select(t_select *select)
 		else if (buff == KEY_TAB)
 			press_tab(select);
 		else if (buff == KEY_FSPACE)
-			enter_rep(select);
+			navigate_rep(select);
 		else if (ft_isprint(buff))
 			search_engine(select, buff);
 		buff = 0;
