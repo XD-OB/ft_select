@@ -14,6 +14,7 @@ static void		sig_handler(int sig)
 	else if (sig == SIGCONT)
 	{
 		set_ncanonic(*aselect);
+		signal(SIGTSTP, &sig_handler);
 		draw_state(*aselect);
 	}
 	else

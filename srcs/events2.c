@@ -59,6 +59,7 @@ void				empty_search(t_select *select)
 
 	i = 0;
 	select->len_search = 0;
+	select->current = select->args;
 	curr = select->current;
 	while (i++ < select->nbr_args)
 	{

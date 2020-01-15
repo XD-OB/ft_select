@@ -1,15 +1,5 @@
 #include "ft_select.h"
 
-static size_t	calcul_nbrcols(size_t nbr_args, int rows)
-{
-	size_t		nbr_cols;
-
-	nbr_cols = nbr_args / rows;
-	if (nbr_args % rows)
-		nbr_cols++;
-	return (nbr_cols);
-}
-
 static void		fill_lenscols(t_select *select)
 {
 	t_dlist		*curr;
@@ -64,6 +54,23 @@ static void		write_emptys(t_select *select)
 	str = ft_strcnew(len, ' ');
 	write(2, str, len);
 	free(str);
+}
+
+void			write_args(t_select *select)
+{
+	t_dlist		*curr;
+	int			n;
+
+	n = 0;
+	curr = select->args;
+	write_arg(select, curr, n++);
+	curr = curr->next;
+	while (curr != select->args)
+	{
+		write_arg(select, curr, n);
+		curr = curr->next;
+		n++;
+	}
 }
 
 void			draw_state(t_select *select)

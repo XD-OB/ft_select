@@ -10,7 +10,7 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-SELECT = main init_free write_args draw_state ncanonic print_selected\
+SELECT = main init_free write_arg draw_state ncanonic print_selected\
 		 signals search_engine navigate_rep fix_prevpath launch_select\
 		 press_tab termcaps events1 events2 tools cursor exit\
 		 delete_me\

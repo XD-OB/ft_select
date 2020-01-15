@@ -23,6 +23,16 @@ void				delete_arg(void *content, size_t size)
 	free(arg);
 }
 
+size_t				calcul_nbrcols(size_t nbr_args, int rows)
+{
+	size_t			nbr_cols;
+
+	nbr_cols = nbr_args / rows;
+	if (nbr_args % rows)
+		nbr_cols++;
+	return (nbr_cols);
+}
+
 t_select			**get_aselect(void)
 {
 	static t_select	*select = NULL;

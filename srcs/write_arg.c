@@ -59,7 +59,7 @@ static void		print_arg(t_select *select, t_dlist *node,
 	reset_cap(select);
 }
 
-static void		write_arg(t_select *select, t_dlist *node, int n)
+void			write_arg(t_select *select, t_dlist *node, int n)
 {
 	t_point		pos;
 	t_arg		*arg;
@@ -76,21 +76,4 @@ static void		write_arg(t_select *select, t_dlist *node, int n)
 	}
 	else
 		print_arg(select, node, arg, width);
-}
-
-void			write_args(t_select *select)
-{
-	t_dlist		*curr;
-	int			n;
-
-	n = 0;
-	curr = select->args;
-	write_arg(select, curr, n++);
-	curr = curr->next;
-	while (curr != select->args)
-	{
-		write_arg(select, curr, n);
-		curr = curr->next;
-		n++;
-	}
 }

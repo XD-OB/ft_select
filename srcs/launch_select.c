@@ -22,6 +22,16 @@ int				is_arrowpage(int key)
 	return (0);
 }
 
+static void		search_events(t_select *select, int buff)
+{
+	if (is_arrowpage(buff))
+		move_search(select, buff);
+	else if (buff == KEY_FSPACE)
+		empty_search(select);
+	else if (ft_isprint(buff))
+		search_engine(select, buff);
+}
+
 void			launch_select(t_select *select)
 {
 	int			buff;
@@ -42,14 +52,10 @@ void			launch_select(t_select *select)
 			print_selected(select);
 		else if (buff == KEY_TAB)
 			press_tab(select);
-		else if (is_arrowpage(buff))
-			move_search(select, buff);
-		else if (buff == KEY_FSPACE)
-			empty_search(select);
 		else if (buff == KEY_DONCE)
 			navigate_rep(select);
-		else if (ft_isprint(buff))
-			search_engine(select, buff);
+		else
+			search_events(select, buff);
 		buff = 0;
 	}
 }
