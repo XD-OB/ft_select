@@ -34,6 +34,7 @@ typedef	struct		s_select
 	size_t			nbr_cols;
 	size_t			len_search;
 	int				*lens_cols;
+	int				real:1;
 	int				take:1;
 }					t_select;
 

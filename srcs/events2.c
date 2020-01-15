@@ -42,7 +42,7 @@ void				move_search(t_select *select, int type)
 	size_t			i;
 
 	i = 1;
-	if (key == KEY_DPAGE)
+	if (type == KEY_DPAGE)
 		result = next_result(select);
 	else
 		result = prev_result(select);

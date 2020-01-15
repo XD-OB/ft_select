@@ -23,21 +23,32 @@ static void		save_old_termios(t_select *select)
 		exit_error_fs(select, ERROR_GETATTR);
 }
 
+static void		init_vars_select(t_select *select, int ac)
+{
+	select->args = NULL;
+	select->lens_cols = NULL;
+	select->take = 0;
+	select->real = 0;
+	select->nbr_cols = 0;
+	select->len_search = 0;
+	select->nbr_args = ac - 1;
+	select->winsize.ws_row = tgetnum("li");
+	select->winsize.ws_col = tgetnum("co");
+}
+
 void			init_select(t_select *select, int ac, char **av)
 {
 	t_dlist		*node;
 	t_arg		*arg;
 	int			i;
 
-	select->args = NULL;
-	select->lens_cols = NULL;
-	select->take = 0;
-	select->nbr_cols = 0;
-	select->len_search = 0;
-	select->nbr_args = ac - 1;
-	select->winsize.ws_row = tgetnum("li");
-	select->winsize.ws_col = tgetnum("co");
 	i = 0;
+	init_vars_select(select, ac);
+	if (!ft_strcmp(av[1], "--real") || !ft_strcmp(av[1], "-r"))
+	{
+		select->real = 1;
+		i++;
+	}
 	while (++i < ac)
 	{
 		arg = create_arg(av[i]);

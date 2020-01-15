@@ -33,6 +33,8 @@ void		exit_error_fs(t_select *select, int type)
 		msg = "Error To Set Params associated with the terminal!";
 	else if (type == ERROR_TCAPNF)
 		msg = "Terminal Capacity not found!";
+	else if (type == ERROR_RMCMD)
+		msg = "Problem to Execute the rm command!";
 	free_select(select);
 	ft_dprintf(2, "%{red}%s%{eoc}\n", msg);
 	exit(EXIT_FAILURE);

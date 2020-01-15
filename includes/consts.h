@@ -25,5 +25,6 @@
 # define ERROR_GETATTR 5
 # define ERROR_SETATTR 6
 # define ERROR_TCAPNF 7
+# define ERROR_RMCMD 8
 
 #endif

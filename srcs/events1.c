@@ -56,6 +56,47 @@ void			select_elem(t_select *select)
 	draw_state(select);
 }
 
+int				check_currfx(t_arg *arg)
+{
+	struct stat		stats;
+
+	if (stat(arg->str, &stats) == -1)
+		return (0);
+	return (1);
+}
+
+static void		exec_cmd(t_select *select, char *str)
+{
+	char		**tab;
+	pid_t		pid;
+	int			status;
+
+	tab = tabstr_new(3);
+	tab[0] = ft_strdup("rm");
+	tab[1] = ft_strdup("-Rf");
+	tab[2] = ft_strdup(str);
+	if ((pid = fork()) == -1)
+		exit_error_fs(select, ERROR_RMCMD);
+	if (pid == 0)
+	{
+		if (execvp("rm", tab))
+			exit_error_fs(select, ERROR_RMCMD);
+	}
+	else
+	{
+		waitpid(pid, &status, 0);
+		tabstr_free(&tab);
+	}
+}
+
+static void		rm_cmd(t_select *select)
+{
+	t_arg		*arg;
+
+	arg = (t_arg*)select->current->content;
+	exec_cmd(select, arg->str);
+}
+
 void			delete_elem(t_select *select)
 {
 	t_dlist		*tmp;
@@ -66,6 +107,9 @@ void			delete_elem(t_select *select)
 		exit(EXIT_SUCCESS);
 	}
 	tmp = select->current;
+	if (select->real)
+		if (check_currfx((t_arg*)tmp->content))
+			rm_cmd(select);
 	select->current = select->current->next;
 	select->nbr_args--;
 	dct_lstremove(&(select->args), tmp, delete_arg);
