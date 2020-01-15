@@ -11,8 +11,8 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 SELECT = main init_free write_args draw_state ncanonic print_selected\
-		 signals tools events search_engine termcaps launch_select\
-		 cursor exit\
+		 signals search_engine navigate_rep fix_prevpath launch_select\
+		 termcaps events tools cursor exit\
 		 delete_me\
 
 SRC = $(addprefix srcs/, $(addsuffix .c, $(SELECT)))

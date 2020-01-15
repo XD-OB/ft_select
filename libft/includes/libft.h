@@ -6,7 +6,7 @@
 /*   By: obelouch <OB-96@hotmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 01:07:21 by obelouch          #+#    #+#             */
-/*   Updated: 2020/01/14 10:44:24 by vegeta           ###   ########.fr       */
+/*   Updated: 2020/01/15 11:47:29 by vegeta           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,13 +197,14 @@ char				*ft_poslltoa(long long int n);
 
 int					tabstr_len(char **tab);
 void				tabstr_free(char ***tab);
-void				tabstr_add(char ***tab, char *elem);
-char				*tabstr_njoin(char **tab, int start, int end, char *sep);
-char				*tabstr_join(char **tab, char *sep);
-char				**tabstr_ncopy(char **tab, int start, int end);
-char				**tabstr_copy(char **tab);
-void				tabstr_print(char **tab);
 void				tabstr_trim(char **tab);
+void				tabstr_print(char **tab);
+void				tabstr_add(char ***tab, char *elem);
+char				*tabstr_join(char **tab, char *sep);
+char				*tabstr_njoin(char **tab, int start, int end, char *sep);
+char				**tabstr_new(size_t len);
+char				**tabstr_copy(char **tab);
+char				**tabstr_ncopy(char **tab, int start, int end);
 
 /*
 **		INT ARRAY:      -----------------------------------------------------
