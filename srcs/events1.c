@@ -56,15 +56,12 @@ void			select_elem(t_select *select)
 	draw_state(select);
 }
 
-static void		rm_cmd(t_select *select)
+static void		rm_cmd(t_select *select, t_arg *arg)
 {
-	t_arg		*arg;
 	char		**tab;
 	int			status;
 	pid_t		pid;
 
-	arg = (t_arg*)select->current->content;
-	exec_cmd(select, arg->str);
 	tab = tabstr_new(3);
 	tab[0] = ft_strdup("rm");
 	tab[1] = ft_strdup("-Rf");
@@ -87,6 +84,7 @@ void			delete_elem(t_select *select)
 {
 	struct stat	stats;
 	t_dlist		*tmp;
+	t_arg		*arg;
 
 	if (!select->args)
 	{
@@ -98,7 +96,7 @@ void			delete_elem(t_select *select)
 	{
 		arg = tmp->content;
 		if (stat(arg->str, &stats) != -1)
-			rm_cmd(select);
+			rm_cmd(select, arg);
 	}
 	select->current = select->current->next;
 	select->nbr_args--;
