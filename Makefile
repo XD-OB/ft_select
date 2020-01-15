@@ -12,7 +12,7 @@ FLAGS = -Wall -Wextra -Werror
 
 SELECT = main init_free write_args draw_state ncanonic print_selected\
 		 signals search_engine navigate_rep fix_prevpath launch_select\
-		 press_tab termcaps events tools cursor exit\
+		 press_tab termcaps events1 events2 tools cursor exit\
 		 delete_me\
 
 SRC = $(addprefix srcs/, $(addsuffix .c, $(SELECT)))
