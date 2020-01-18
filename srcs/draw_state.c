@@ -6,7 +6,7 @@
 /*   By: obelouch <OB-96@hotmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 06:31:49 by obelouch          #+#    #+#             */
-/*   Updated: 2020/01/18 06:31:51 by obelouch         ###   ########.fr       */
+/*   Updated: 2020/01/18 07:30:19 by obelouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int		check_winsize(t_select *select)
 {
 	size_t		line_len;
 	size_t		i;
+	t_point		p;
 
 	i = 0;
 	line_len = 0;
@@ -52,7 +53,16 @@ static int		check_winsize(t_select *select)
 		line_len += select->lens_cols[i++];
 	line_len += (select->nbr_cols - 1) * 2;
 	if (line_len > select->winsize.ws_col)
+	{
+		if (select->winsize.ws_col > 20)
+		{
+			p.y = select->winsize.ws_row / 2;
+			p.x = select->winsize.ws_col / 2 - 10;
+			move_cursor(select, p);
+			ft_dprintf(2, "Window is too small!");
+		}
 		return (0);
+	}
 	return (1);
 }
 

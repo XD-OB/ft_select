@@ -6,7 +6,7 @@
 /*   By: obelouch <OB-96@hotmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/18 06:27:11 by obelouch          #+#    #+#             */
-/*   Updated: 2020/01/18 06:46:08 by obelouch         ###   ########.fr       */
+/*   Updated: 2020/01/18 07:07:36 by obelouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void			exit_help(void)
 	ft_dprintf(2, "\n        * Manual *\n");
 	ft_dprintf(2, "%{blue}-----------------------------------");
 	ft_dprintf(2, "------------------------%{eoc}\n");
-	ft_dprintf(2, "%{GREEN}TAB   %{eoc}    : (%{cyan}ON %{eoc}) ");
+	ft_dprintf(2, "%{GREEN}TAB%{eoc}       : (%{cyan}ON %{eoc}) ");
 	ft_dprintf(2, "Activate selection with dynamic search.\n       ");
 	ft_dprintf(2, "     (%{cyan}OFF%{eoc}) End and select the results.\n");
 	ft_dprintf(2, "%{GREEN}HOME  %{eoc}    : ");
 	ft_dprintf(2, "Clear the search results.\n");
-	ft_dprintf(2, "%{GREEN}END   %{eoc}    : ");
+	ft_dprintf(2, "%{GREEN}END%{eoc}       : ");
 	ft_dprintf(2, "Enter in a folder and load his contents.\n");
 	ft_dprintf(2, "%{GREEN}SPACE %{eoc}    : Select Element.\n");
 	ft_dprintf(2, "%{GREEN}UP PAGE%{eoc}   : ");
