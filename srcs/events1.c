@@ -86,11 +86,6 @@ void			delete_elem(t_select *select)
 	t_dlist		*tmp;
 	t_arg		*arg;
 
-	if (!select->args)
-	{
-		free_select(select);
-		exit(EXIT_SUCCESS);
-	}
 	tmp = select->current;
 	if (select->real)
 	{
@@ -101,5 +96,10 @@ void			delete_elem(t_select *select)
 	select->current = select->current->next;
 	select->nbr_args--;
 	dct_lstremove(&(select->args), tmp, delete_arg);
+	if (!select->args)
+	{
+		free_select(select);
+		exit(EXIT_SUCCESS);
+	}
 	draw_state(select, 1);
 }
