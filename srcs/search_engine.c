@@ -86,5 +86,5 @@ void			search_engine(t_select *select, char c)
 		select->take = 0;
 	}
 	free(ref);
-	draw_state(select);
+	draw_state(select, 0);
 }

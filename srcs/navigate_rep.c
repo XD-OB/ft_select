@@ -70,5 +70,5 @@ void				navigate_rep(t_select *select)
 	free(parent);
 	closedir(dir);
 	select->current = select->args;
-	draw_state(select);
+	draw_state(select, 1);
 }

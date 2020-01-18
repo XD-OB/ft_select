@@ -46,14 +46,30 @@ static int		check_winsize(t_select *select)
 
 static void		write_emptys(t_select *select)
 {
+	char		*delline_cap;
 	char		*str;
 	size_t		len;
+	t_point		p;
 
-	move_cursor(select, pt_new(0, 0));
-	len = select->winsize.ws_row * select->winsize.ws_col;
-	str = ft_strcnew(len, ' ');
-	write(2, str, len);
-	free(str);
+	p = pt_new(0, 0);
+	delline_cap = tgetstr("ce", NULL);
+	if (delline_cap)
+	{
+		while (p.y < select->winsize.ws_row)
+		{
+			move_cursor(select, p);
+			tputs(delline_cap, 1, ft_putint);
+			p.y++;
+		}
+	}
+	else
+	{
+		move_cursor(select, p);
+		len = select->winsize.ws_row * select->winsize.ws_col;
+		str = ft_strcnew(len, ' ');
+		write(2, str, len);
+		free(str);
+	}
 }
 
 void			write_args(t_select *select)
@@ -73,9 +89,10 @@ void			write_args(t_select *select)
 	}
 }
 
-void			draw_state(t_select *select)
+void			draw_state(t_select *select, int del)
 {
-	write_emptys(select);
+	if (del)
+		write_emptys(select);
 	if (select->args)
 	{
 		fill_lenscols(select);

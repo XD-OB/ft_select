@@ -1,6 +1,14 @@
 #ifndef CONSTS_H
 # define CONSTS_H
 
+# include <sys/ioctl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <termcap.h>
+# include <termios.h>
+# include <signal.h>
+# include <dirent.h>
+
 # define KEY_FSPACE 2117294875
 # define KEY_DONCE 2117491483
 # define KEY_UONCE 2117425947

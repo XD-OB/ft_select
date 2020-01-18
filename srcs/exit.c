@@ -1,8 +1,15 @@
 #include "ft_select.h"
 
-void		exit_error(int type)
+void			exit_usage(void)
 {
-	char	*msg;
+	ft_dprintf(2, "%{red}Usage:%{eoc} ./ft_select [-r] (arg1 ...)\n");
+	ft_dprintf(2, "   real mode: --real -r : Delete the erased files!\n");
+	exit(0);
+}
+
+void			exit_error(int type)
+{
+	char		*msg;
 
 	msg = "error";
 	if (type == ERROR_ALLOC)
@@ -17,9 +24,9 @@ void		exit_error(int type)
 	exit(EXIT_FAILURE);
 }
 
-void		exit_error_fs(t_select *select, int type)
+void			exit_error_fs(t_select *select, int type)
 {
-	char	*msg;
+	char		*msg;
 
 	msg = "error";
 	move_cursor(select, pt_new(0, 0));

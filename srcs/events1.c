@@ -41,7 +41,7 @@ void			move_arrow(t_select *select, int type)
 			while (i++ < select->winsize.ws_row)
 				select->current = select->current->prev;
 	}
-	draw_state(select);
+	draw_state(select, 0);
 }
 
 void			select_elem(t_select *select)
@@ -53,7 +53,7 @@ void			select_elem(t_select *select)
 	arg = (t_arg*)select->current->content;
 	arg->nat_select = (!arg->nat_select) ? 1 : 0;
 	select->current = select->current->next;
-	draw_state(select);
+	draw_state(select, 0);
 }
 
 static void		rm_cmd(t_select *select, t_arg *arg)
@@ -101,5 +101,5 @@ void			delete_elem(t_select *select)
 	select->current = select->current->next;
 	select->nbr_args--;
 	dct_lstremove(&(select->args), tmp, delete_arg);
-	draw_state(select);
+	draw_state(select, 1);
 }

@@ -41,5 +41,5 @@ void			press_tab(t_select *select)
 	else
 		select->take = 1;
 	select->len_search = 0;
-	draw_state(select);
+	draw_state(select, 0);
 }

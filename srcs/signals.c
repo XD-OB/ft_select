@@ -15,7 +15,7 @@ static void		sig_handler(int sig)
 	{
 		set_ncanonic(*aselect);
 		signal(SIGTSTP, &sig_handler);
-		draw_state(*aselect);
+		draw_state(*aselect, 0);
 	}
 	else
 	{
@@ -32,7 +32,7 @@ static void		win_handler(int sig)
 	aselect = get_aselect();
 	ioctl(STDIN_FILENO, TIOCGWINSZ,
 			&((*aselect)->winsize));
-	draw_state(*aselect);
+	draw_state(*aselect, 1);
 }
 
 void			signal_handlers(void)

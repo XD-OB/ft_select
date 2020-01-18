@@ -48,7 +48,7 @@ void				move_search(t_select *select, int type)
 		result = prev_result(select);
 	if (result)
 		select->current = result;
-	draw_state(select);
+	draw_state(select, 0);
 }
 
 void				empty_search(t_select *select)
@@ -68,5 +68,5 @@ void				empty_search(t_select *select)
 		arg->dyn_select = 0;
 		curr = curr->next;
 	}
-	draw_state(select);
+	draw_state(select, 0);
 }

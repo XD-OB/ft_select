@@ -37,7 +37,7 @@ void			launch_select(t_select *select)
 	int			buff;
 
 	buff = 0;
-	draw_state(select);
+	draw_state(select, 0);
 	while (read(STDIN_FILENO, &buff, 4) != 0)
 	{
 		if (buff == KEY_ESC)

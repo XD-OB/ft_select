@@ -1,13 +1,6 @@
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
-# include <sys/ioctl.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <termcap.h>
-# include <termios.h>
-# include <signal.h>
-# include <dirent.h>
 # include "consts.h"
 # include "libft.h"
 
@@ -40,9 +33,10 @@ typedef	struct		s_select
 
 void				init_term(void);
 t_select			**get_aselect(void);
-void				signal_handlers(void);
+void				exit_usage(void);
 void				exit_error(int type);
 void				exit_error_fs(t_select *select, int type);
+void				signal_handlers(void);
 void				init_select(t_select *select, int ac, char **av);
 void				free_select(t_select *select);
 t_arg				*create_arg(char *str);
@@ -57,7 +51,7 @@ void				print_selected(t_select *select);
 void				empty_search(t_select *select);
 void				delete_elem(t_select *select);
 void				select_elem(t_select *select);
-void				draw_state(t_select *select);
+void				draw_state(t_select *select, int del);
 void				set_ncanonic(t_select *select);
 void				unset_ncanonic(t_select *select);
 void				print_selected(t_select *select);
@@ -72,6 +66,6 @@ void				bold_cap(t_select *select);
 void				select_cap(void);
 int					ft_putint(int c);
 
-void				print_select(t_select select);       ///////////
+//void				print_select(t_select select);       ///////////
 
 #endif
