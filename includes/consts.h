@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   consts.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obelouch <OB-96@hotmail.com>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/18 06:27:41 by obelouch          #+#    #+#             */
+/*   Updated: 2020/01/18 06:28:01 by obelouch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CONSTS_H
 # define CONSTS_H
 
@@ -9,19 +21,18 @@
 # include <signal.h>
 # include <dirent.h>
 
-# define KEY_FSPACE 2117294875
-# define KEY_DONCE 2117491483
-# define KEY_UONCE 2117425947
-# define KEY_DPAGE 4610843
-# define KEY_UPAGE 4741915
+# define KEY_DPAGE 2117491483
+# define KEY_UPAGE 2117425947
+# define KEY_DEL 2117294875
+# define KEY_HOME 4741915
 # define KEY_RIGHT 4414235
 # define KEY_LEFT 4479771
 # define KEY_DOWN 4348699
 # define KEY_UP 4283163
-# define KEY_BSPACE 8
+# define KEY_END 4610843
+# define KEY_BSPACE 127
 # define KEY_SPACE 32
 # define KEY_ENTER 10
-# define KEY_DEL 127
 # define KEY_ESC 27
 # define KEY_TAB 9
 

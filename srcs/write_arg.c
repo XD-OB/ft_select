@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_arg.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obelouch <OB-96@hotmail.com>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/18 06:28:38 by obelouch          #+#    #+#             */
+/*   Updated: 2020/01/18 06:32:33 by obelouch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 static void		set_color(t_select *select, char *str)
@@ -23,7 +35,7 @@ static void		set_color(t_select *select, char *str)
 }
 
 static void		print_search_part(t_select *select, t_dlist *node,
-									t_arg* arg)
+									t_arg *arg)
 {
 	ft_dprintf(2, "%{YELLOW}");
 	if (node == select->current)

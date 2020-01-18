@@ -1,10 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obelouch <OB-96@hotmail.com>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/18 06:27:11 by obelouch          #+#    #+#             */
+/*   Updated: 2020/01/18 06:46:08 by obelouch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 void			exit_usage(void)
 {
-	ft_dprintf(2, "%{red}Usage:%{eoc} ./ft_select [-r] (arg1 ...)\n");
+	ft_dprintf(2, "%{red}Usage:%{eoc} ./ft_select [-rh] (arg1 ...)\n");
 	ft_dprintf(2, "   real mode: --real -r : Delete the erased files!\n");
-	exit(0);
+	ft_dprintf(2, "   real mode: --help -h : Show the Manual!\n");
+	exit(EXIT_FAILURE);
+}
+
+void			exit_help(void)
+{
+	ft_dprintf(2, "\n        * Manual *\n");
+	ft_dprintf(2, "%{blue}-----------------------------------");
+	ft_dprintf(2, "------------------------%{eoc}\n");
+	ft_dprintf(2, "%{GREEN}TAB   %{eoc}    : (%{cyan}ON %{eoc}) ");
+	ft_dprintf(2, "Activate selection with dynamic search.\n       ");
+	ft_dprintf(2, "     (%{cyan}OFF%{eoc}) End and select the results.\n");
+	ft_dprintf(2, "%{GREEN}HOME  %{eoc}    : ");
+	ft_dprintf(2, "Clear the search results.\n");
+	ft_dprintf(2, "%{GREEN}END   %{eoc}    : ");
+	ft_dprintf(2, "Enter in a folder and load his contents.\n");
+	ft_dprintf(2, "%{GREEN}SPACE %{eoc}    : Select Element.\n");
+	ft_dprintf(2, "%{GREEN}UP PAGE%{eoc}   : ");
+	ft_dprintf(2, "Put the cursor in the prev search result.\n");
+	ft_dprintf(2, "%{GREEN}DOWN PAGE%{eoc} : ");
+	ft_dprintf(2, "Put the cursor in the next search result.\n");
+	ft_dprintf(2, "%{GREEN}BACK SPACE%{eoc}: ");
+	ft_dprintf(2, "Remove the element.\n");
+	ft_dprintf(2, "%{GREEN}DELETE    %{eoc}: ");
+	ft_dprintf(2, "Remove the element.\n");
+	ft_dprintf(2, "%{GREEN}ARROWS%{eoc}    : Move the cursor in the list.\n");
+	ft_dprintf(2, "%{GREEN}ENTER %{eoc}    : Exit and print the results.\n");
+	ft_dprintf(2, "%{GREEN}EXIT  %{eoc}    : Exit and lose the results.\n");
+	ft_dprintf(2, "%{blue}-----------------------------------");
+	ft_dprintf(2, "------------------------%{eoc}\n");
+	exit(EXIT_SUCCESS);
 }
 
 void			exit_error(int type)

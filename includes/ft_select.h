@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_select.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obelouch <OB-96@hotmail.com>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/18 06:28:07 by obelouch          #+#    #+#             */
+/*   Updated: 2020/01/18 06:48:38 by obelouch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
@@ -33,6 +45,7 @@ typedef	struct		s_select
 
 void				init_term(void);
 t_select			**get_aselect(void);
+void				exit_help(void);
 void				exit_usage(void);
 void				exit_error(int type);
 void				exit_error_fs(t_select *select, int type);
@@ -65,7 +78,5 @@ void				reset_cap(t_select *select);
 void				bold_cap(t_select *select);
 void				select_cap(void);
 int					ft_putint(int c);
-
-//void				print_select(t_select select);       ///////////
 
 #endif

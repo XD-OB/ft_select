@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   launch_select.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: obelouch <OB-96@hotmail.com>               +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/18 06:31:10 by obelouch          #+#    #+#             */
+/*   Updated: 2020/01/18 06:31:12 by obelouch         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 static int		is_arrow(int key)
@@ -26,7 +38,7 @@ static void		search_events(t_select *select, int buff)
 {
 	if (is_arrowpage(buff))
 		move_search(select, buff);
-	else if (buff == KEY_FSPACE)
+	else if (buff == KEY_HOME)
 		empty_search(select);
 	else if (ft_isprint(buff))
 		search_engine(select, buff);
@@ -52,7 +64,7 @@ void			launch_select(t_select *select)
 			print_selected(select);
 		else if (buff == KEY_TAB)
 			press_tab(select);
-		else if (buff == KEY_DONCE)
+		else if (buff == KEY_END)
 			navigate_rep(select);
 		else
 			search_events(select, buff);
