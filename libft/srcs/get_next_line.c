@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obelouch <OB-96@hotmail.com>               +#+  +:+       +#+        */
+/*   By: ishaimou <ishaimou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/17 18:19:36 by obelouch          #+#    #+#             */
-/*   Updated: 2019/12/28 00:34:11 by vegeta           ###   ########.fr       */
+/*   Updated: 2020/01/22 00:04:04 by ishaimou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ int						get_next_line(int const fd, char **line)
 	}
 	*line = ft_strsub(tab[fd], 0, ft_linelen(tab[fd]));
 	if (ft_line(tab[fd]) == NULL)
-	{
-		free(tab[fd]);
 		return (0);
-	}
 	return (1);
 }
