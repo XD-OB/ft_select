@@ -6,7 +6,7 @@
 /*   By: ishaimou <ishaimou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 01:07:21 by obelouch          #+#    #+#             */
-/*   Updated: 2020/01/22 06:23:25 by obelouch         ###   ########.fr       */
+/*   Updated: 2020/01/21 22:07:38 by ishaimou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,5 +311,7 @@ int					ft_min(int a, int b);
 int					ft_sqrt(int nb);
 int					ft_prime(int nb);
 void				ft_epurstr(char **str);
+int					ft_ends_with(char *str, char *word);
+t_bool				ft_isnumeric_str(char *str);
 
 #endif

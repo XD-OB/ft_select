@@ -6,6 +6,6 @@ In doing this, as long as you press alphanumeric keys, nothing special happens. 
 
 Your terminal manages many things for you without you noticing, such as for instance the display of characters as you type them or the bufferisation of each line.
 
-**obelouch** 1337
-
 [link to project pdf!](http://https://github.com/XD-OB/ft_select/blob/master/ft_select.en.pdf)
+
+**obelouch** 1337

@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isnumeric_string.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obelouch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aaguert <aaguert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/04 18:39:46 by obelouch          #+#    #+#             */
-/*   Updated: 2020/01/23 22:37:07 by obelouch         ###   ########.fr       */
+/*   Created: 2020/01/02 13:01:23 by aaguert           #+#    #+#             */
+/*   Updated: 2020/01/02 13:17:45 by aaguert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlen(const char *str)
+t_bool	ft_isnumeric_str(char *str)
 {
-	size_t	i;
+	int i;
 
 	if (!str)
-		return (0);
+		return (FALSE);
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (FALSE);
 		i++;
-	return (i);
+	}
+	return (TRAP_TRACE);
 }
