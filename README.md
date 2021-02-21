@@ -11,4 +11,8 @@ Your terminal manages many things for you without you noticing, such as for inst
 [Subject](http://https://github.com/XD-OB/ft_select/blob/master/ft_select.en.pdf)
 
 ## Owner
-- Oussama Belouche 1337
+- **Oussama Belouche** 1337
+
+#
+[![forthebadge](https://forthebadge.com/images/badges/makes-people-smile.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/winter-is-coming.svg)](https://forthebadge.com)
